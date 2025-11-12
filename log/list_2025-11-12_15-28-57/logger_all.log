@@ -1,0 +1,63 @@
+[0.062s] DEBUG:colcon:Command line arguments: ['/usr/bin/colcon', 'list', '-p', '--base-paths', '/home/dell/hardware_interface_vnx', '--log-base', '/dev/null']
+[0.062s] DEBUG:colcon:Parsed command line arguments: Namespace(log_base=None, log_level=None, verb_name='list', build_base='build', ignore_user_meta=False, metas=['./colcon.meta'], base_paths=['/home/dell/hardware_interface_vnx', '--log-base', '/dev/null'], packages_ignore=None, packages_ignore_regex=None, paths=None, packages_up_to=None, packages_up_to_regex=None, packages_above=None, packages_above_and_dependencies=None, packages_above_depth=None, packages_select_by_dep=None, packages_skip_by_dep=None, packages_skip_up_to=None, packages_select_build_failed=False, packages_skip_build_finished=False, packages_select_test_failures=False, packages_skip_test_passed=False, packages_select=None, packages_skip=None, packages_select_regex=None, packages_skip_regex=None, packages_start=None, packages_end=None, allow_overriding=[], topological_order=False, names_only=False, paths_only=True, topological_graph=False, topological_graph_dot=False, topological_graph_density=False, topological_graph_legend=False, topological_graph_dot_cluster=False, topological_graph_dot_include_skipped=False, mixin_files=None, mixin=None, verb_parser=<colcon_mixin.mixin.mixin_argument.MixinArgumentDecorator object at 0x7cd5dfee0070>, verb_extension=<colcon_package_information.verb.list.ListVerb object at 0x7cd5dffe89d0>, main=<bound method ListVerb.main of <colcon_package_information.verb.list.ListVerb object at 0x7cd5dffe89d0>>, mixin_verb=('list',))
+[0.089s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) check parameters
+[0.089s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) check parameters
+[0.089s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) check parameters
+[0.089s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) check parameters
+[0.089s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) discover
+[0.089s] INFO:colcon.colcon_core.package_discovery:Crawling recursively for packages in '/home/dell/hardware_interface_vnx', '/home/dell/hardware_interface_vnx/--log-base', '/dev/null'
+[0.089s] Level 1:colcon.colcon_core.package_identification:_identify(/home/dell/hardware_interface_vnx) by extensions ['ignore', 'ignore_ament_install']
+[0.089s] Level 1:colcon.colcon_core.package_identification:_identify(/home/dell/hardware_interface_vnx) by extension 'ignore'
+[0.089s] Level 1:colcon.colcon_core.package_identification:_identify(/home/dell/hardware_interface_vnx) by extension 'ignore_ament_install'
+[0.089s] Level 1:colcon.colcon_core.package_identification:_identify(/home/dell/hardware_interface_vnx) by extensions ['colcon_pkg']
+[0.089s] Level 1:colcon.colcon_core.package_identification:_identify(/home/dell/hardware_interface_vnx) by extension 'colcon_pkg'
+[0.089s] Level 1:colcon.colcon_core.package_identification:_identify(/home/dell/hardware_interface_vnx) by extensions ['colcon_meta']
+[0.089s] Level 1:colcon.colcon_core.package_identification:_identify(/home/dell/hardware_interface_vnx) by extension 'colcon_meta'
+[0.089s] Level 1:colcon.colcon_core.package_identification:_identify(/home/dell/hardware_interface_vnx) by extensions ['ros']
+[0.089s] Level 1:colcon.colcon_core.package_identification:_identify(/home/dell/hardware_interface_vnx) by extension 'ros'
+[0.098s] Level 1:colcon.colcon_core.package_identification:_identify(/home/dell/hardware_interface_vnx) by extensions ['cmake', 'python']
+[0.098s] Level 1:colcon.colcon_core.package_identification:_identify(/home/dell/hardware_interface_vnx) by extension 'cmake'
+[0.098s] Level 1:colcon.colcon_core.package_identification:_identify(/home/dell/hardware_interface_vnx) by extension 'python'
+[0.098s] Level 1:colcon.colcon_core.package_identification:_identify(/home/dell/hardware_interface_vnx) by extensions ['python_setup_py']
+[0.098s] Level 1:colcon.colcon_core.package_identification:_identify(/home/dell/hardware_interface_vnx) by extension 'python_setup_py'
+[0.098s] Level 1:colcon.colcon_core.package_identification:_identify(/home/dell/hardware_interface_vnx/log) by extensions ['ignore', 'ignore_ament_install']
+[0.098s] Level 1:colcon.colcon_core.package_identification:_identify(/home/dell/hardware_interface_vnx/log) by extension 'ignore'
+[0.098s] Level 1:colcon.colcon_core.package_identification:_identify(/home/dell/hardware_interface_vnx/log) ignored
+[0.098s] Level 1:colcon.colcon_core.package_identification:_identify(/home/dell/hardware_interface_vnx/src) by extensions ['ignore', 'ignore_ament_install']
+[0.098s] Level 1:colcon.colcon_core.package_identification:_identify(/home/dell/hardware_interface_vnx/src) by extension 'ignore'
+[0.098s] Level 1:colcon.colcon_core.package_identification:_identify(/home/dell/hardware_interface_vnx/src) by extension 'ignore_ament_install'
+[0.098s] Level 1:colcon.colcon_core.package_identification:_identify(/home/dell/hardware_interface_vnx/src) by extensions ['colcon_pkg']
+[0.098s] Level 1:colcon.colcon_core.package_identification:_identify(/home/dell/hardware_interface_vnx/src) by extension 'colcon_pkg'
+[0.098s] Level 1:colcon.colcon_core.package_identification:_identify(/home/dell/hardware_interface_vnx/src) by extensions ['colcon_meta']
+[0.098s] Level 1:colcon.colcon_core.package_identification:_identify(/home/dell/hardware_interface_vnx/src) by extension 'colcon_meta'
+[0.098s] Level 1:colcon.colcon_core.package_identification:_identify(/home/dell/hardware_interface_vnx/src) by extensions ['ros']
+[0.098s] Level 1:colcon.colcon_core.package_identification:_identify(/home/dell/hardware_interface_vnx/src) by extension 'ros'
+[0.098s] Level 1:colcon.colcon_core.package_identification:_identify(/home/dell/hardware_interface_vnx/src) by extensions ['cmake', 'python']
+[0.098s] Level 1:colcon.colcon_core.package_identification:_identify(/home/dell/hardware_interface_vnx/src) by extension 'cmake'
+[0.098s] Level 1:colcon.colcon_core.package_identification:_identify(/home/dell/hardware_interface_vnx/src) by extension 'python'
+[0.098s] Level 1:colcon.colcon_core.package_identification:_identify(/home/dell/hardware_interface_vnx/src) by extensions ['python_setup_py']
+[0.098s] Level 1:colcon.colcon_core.package_identification:_identify(/home/dell/hardware_interface_vnx/src) by extension 'python_setup_py'
+[0.098s] Level 1:colcon.colcon_core.package_identification:_identify(/home/dell/hardware_interface_vnx/src/log) by extensions ['ignore', 'ignore_ament_install']
+[0.098s] Level 1:colcon.colcon_core.package_identification:_identify(/home/dell/hardware_interface_vnx/src/log) by extension 'ignore'
+[0.098s] Level 1:colcon.colcon_core.package_identification:_identify(/home/dell/hardware_interface_vnx/src/log) ignored
+[0.099s] Level 1:colcon.colcon_core.package_identification:_identify(/home/dell/hardware_interface_vnx/src/motor_control) by extensions ['ignore', 'ignore_ament_install']
+[0.099s] Level 1:colcon.colcon_core.package_identification:_identify(/home/dell/hardware_interface_vnx/src/motor_control) by extension 'ignore'
+[0.099s] Level 1:colcon.colcon_core.package_identification:_identify(/home/dell/hardware_interface_vnx/src/motor_control) by extension 'ignore_ament_install'
+[0.099s] Level 1:colcon.colcon_core.package_identification:_identify(/home/dell/hardware_interface_vnx/src/motor_control) by extensions ['colcon_pkg']
+[0.099s] Level 1:colcon.colcon_core.package_identification:_identify(/home/dell/hardware_interface_vnx/src/motor_control) by extension 'colcon_pkg'
+[0.099s] Level 1:colcon.colcon_core.package_identification:_identify(/home/dell/hardware_interface_vnx/src/motor_control) by extensions ['colcon_meta']
+[0.099s] Level 1:colcon.colcon_core.package_identification:_identify(/home/dell/hardware_interface_vnx/src/motor_control) by extension 'colcon_meta'
+[0.099s] Level 1:colcon.colcon_core.package_identification:_identify(/home/dell/hardware_interface_vnx/src/motor_control) by extensions ['ros']
+[0.099s] Level 1:colcon.colcon_core.package_identification:_identify(/home/dell/hardware_interface_vnx/src/motor_control) by extension 'ros'
+[0.100s] DEBUG:colcon.colcon_core.package_identification:Package '/home/dell/hardware_interface_vnx/src/motor_control' with type 'ros.ament_cmake' and name 'motor_control'
+[0.100s] Level 1:colcon.colcon_core.package_identification:_identify(/home/dell/hardware_interface_vnx/src/motor_feedback_msg) by extensions ['ignore', 'ignore_ament_install']
+[0.100s] Level 1:colcon.colcon_core.package_identification:_identify(/home/dell/hardware_interface_vnx/src/motor_feedback_msg) by extension 'ignore'
+[0.100s] Level 1:colcon.colcon_core.package_identification:_identify(/home/dell/hardware_interface_vnx/src/motor_feedback_msg) by extension 'ignore_ament_install'
+[0.101s] Level 1:colcon.colcon_core.package_identification:_identify(/home/dell/hardware_interface_vnx/src/motor_feedback_msg) by extensions ['colcon_pkg']
+[0.101s] Level 1:colcon.colcon_core.package_identification:_identify(/home/dell/hardware_interface_vnx/src/motor_feedback_msg) by extension 'colcon_pkg'
+[0.101s] Level 1:colcon.colcon_core.package_identification:_identify(/home/dell/hardware_interface_vnx/src/motor_feedback_msg) by extensions ['colcon_meta']
+[0.101s] Level 1:colcon.colcon_core.package_identification:_identify(/home/dell/hardware_interface_vnx/src/motor_feedback_msg) by extension 'colcon_meta'
+[0.101s] Level 1:colcon.colcon_core.package_identification:_identify(/home/dell/hardware_interface_vnx/src/motor_feedback_msg) by extensions ['ros']
+[0.101s] Level 1:colcon.colcon_core.package_identification:_identify(/home/dell/hardware_interface_vnx/src/motor_feedback_msg) by extension 'ros'
+[0.101s] DEBUG:colcon.colcon_core.package_identification:Package '/home/dell/hardware_interface_vnx/src/motor_feedback_msg' with type 'ros.ament_cmake' and name 'motor_feedback_msg'
+[0.101s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) using defaults
