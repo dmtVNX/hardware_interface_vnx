@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<library path="librobstride_hardware_simple">
+  <class
+    type="motor_control::RobstrideSystemHardwareSimple"
+    base_class_type="hardware_interface::SystemInterface">
+    <description>Robstride RS03 hardware interface (POSITION only) for JointGroupPositionController</description>
+  </class>
+</library>
