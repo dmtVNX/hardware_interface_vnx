@@ -1,0 +1,9 @@
+<library path="motor_control_hw_interface">
+  <class name="motor_control_hw_interface/RobstrideSystem" 
+         type="motor_control_hw_interface::RobstrideSystem" 
+         base_class_type="hardware_interface::SystemInterface">
+    <description>
+      Hardware interface for Robstride motors using QuadrupedController
+    </description>
+  </class>
+</library>

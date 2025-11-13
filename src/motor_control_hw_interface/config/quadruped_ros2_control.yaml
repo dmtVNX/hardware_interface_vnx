@@ -1,0 +1,46 @@
+hardware_interfaces:
+  - name: "RobstrideHardwareInterface"
+    type: "hardware_interface::SystemInterface"
+    joints:
+      - name: "joint1"
+        type: "position"
+      - name: "joint2"
+        type: "position"
+      - name: "joint3"
+        type: "position"
+      - name: "joint4"
+        type: "position"
+
+controllers:
+  - name: "joint_position_controller"
+    type: "position_controllers/JointPositionController"
+    joints:
+      - "joint1"
+      - "joint2"
+      - "joint3"
+      - "joint4"
+    pid:
+      p: 100.0
+      i: 0.0
+      d: 10.0
+      i_clamp: 1.0
+
+  - name: "joint_velocity_controller"
+    type: "velocity_controllers/JointVelocityController"
+    joints:
+      - "joint1"
+      - "joint2"
+      - "joint3"
+      - "joint4"
+    pid:
+      p: 50.0
+      i: 0.0
+      d: 5.0
+      i_clamp: 0.5
+
+ros2_control:
+  update_rate: 100.0
+  hardware_interface: "RobstrideHardwareInterface"
+  controllers:
+    - "joint_position_controller"
+    - "joint_velocity_controller"

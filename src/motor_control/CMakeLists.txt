@@ -15,20 +15,25 @@ find_package(motor_feedback_msg REQUIRED)
 # Include directories
 include_directories(include)
 
-# ========== EXISTING LIBRARIES ==========
-add_library(motor_config
+# ========== MOTOR CONFIG LIBRARY ==========
+add_library(motor_config STATIC
   src/motor_config.cpp
   src/robstride.cpp
 )
+
+#  CRITICAL: Add -fPIC flag
+set_target_properties(motor_config PROPERTIES
+  POSITION_INDEPENDENT_CODE ON
+)
+
 ament_target_dependencies(motor_config
   rclcpp
   std_msgs
   can_msgs
   motor_feedback_msg
 )
-target_link_libraries(motor_config)
 
-# ========== EXISTING NODE (3 motors) ==========
+# ========== MOTOR CONTROL NODE (3 motors) ==========
 add_executable(motor_control_node
   src/motor_control_node.cpp
 )
@@ -40,10 +45,16 @@ ament_target_dependencies(motor_control_node
   motor_feedback_msg
 )
 
-# ========== NEW: QUADRUPED CONTROLLER ==========
-add_library(quadruped_controller
+# ========== QUADRUPED CONTROLLER LIBRARY ==========
+add_library(quadruped_controller STATIC
   src/quadruped_controller.cpp
 )
+
+#  CRITICAL: Add -fPIC flag
+set_target_properties(quadruped_controller PROPERTIES
+  POSITION_INDEPENDENT_CODE ON
+)
+
 target_link_libraries(quadruped_controller motor_config)
 ament_target_dependencies(quadruped_controller
   rclcpp
@@ -52,7 +63,7 @@ ament_target_dependencies(quadruped_controller
   motor_feedback_msg
 )
 
-# ========== NEW: QUADRUPED NODE (12 motors) ==========
+# ========== QUADRUPED CONTROL NODE (12 motors) ==========
 add_executable(quadruped_control_node
   src/quadruped_control_node.cpp
 )
@@ -68,14 +79,17 @@ ament_target_dependencies(quadruped_control_node
 )
 
 # ========== INSTALL ==========
-install(TARGETS motor_config quadruped_controller
+install(TARGETS 
+  motor_config
+  quadruped_controller
   ARCHIVE DESTINATION lib
   LIBRARY DESTINATION lib
   RUNTIME DESTINATION bin
 )
 
-
-install(TARGETS motor_control_node quadruped_control_node
+install(TARGETS 
+  motor_control_node
+  quadruped_control_node
   DESTINATION lib/${PROJECT_NAME}
 )
 
@@ -83,7 +97,9 @@ install(DIRECTORY include/
   DESTINATION include
 )
 
-install(DIRECTORY launch scripts
+install(DIRECTORY 
+  launch 
+  scripts
   DESTINATION share/${PROJECT_NAME}/
   USE_SOURCE_PERMISSIONS
 )
@@ -96,7 +112,10 @@ if(BUILD_TESTING)
 endif()
 
 ament_export_include_directories(include)
-ament_export_libraries(motor_config quadruped_controller)
+ament_export_libraries(
+  motor_config
+  quadruped_controller
+)
 ament_export_dependencies(
   rclcpp
   std_msgs
