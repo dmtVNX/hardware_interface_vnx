@@ -208,6 +208,9 @@ public:
                   const std::shared_ptr<rclcpp::Node>& node_handle,
                   const std::string &command_tx);
 
+  // Getter for CAN_ID
+  uint8_t getCANID() const { return CAN_ID; }
+
   // --- Device discovery / parameter R/W ---
   void RobStrite_Get_CAN_ID();                                      // Send type 0x00 to query IDs
   void Set_RobStrite_Motor_parameter(uint16_t Index, float Value, char Value_mode); // type 0x12 write

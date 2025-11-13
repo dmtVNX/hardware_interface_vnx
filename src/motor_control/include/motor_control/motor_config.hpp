@@ -127,22 +127,16 @@ public:
   // Fill its arrays in the RX callback using data parsed from RobStrite_Motor instances.
   motor_feedback_msg::msg::MotorFeedback joint_feedback;
 
-  // Lookup a motor by “index”. IMPORTANT:
-  RobStrite_Motor& getMotor(uint8_t ID) {
-    if (ID == 0x01) return l1_joint;
-    else if (ID == 0x02) return l2_joint;
-    else if (ID == 0x03) return l3_joint;
-    else {
-        throw std::runtime_error("Invalid motor ID: 0x" + 
-            std::to_string(ID) + ". Valid IDs: 0x01, 0x02, 0x03");
-    }
-  }
+  // Lookup a motor by can_id
+  RobStrite_Motor& getMotor(uint8_t ID);
 
 private:
   // Each RobStrite_Motor knows how to encode/decode its own frames.
   RobStrite_Motor l1_joint;  // Motor 1
   RobStrite_Motor l2_joint;  // Motor 2
   RobStrite_Motor l3_joint;  // Motor 3
+
+  void buildMotorMaps();
 
 };
 

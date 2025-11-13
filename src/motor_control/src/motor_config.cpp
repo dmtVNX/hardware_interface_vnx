@@ -1,4 +1,5 @@
 #include "motor_control/motor_config.hpp"
+#include <stdexcept>
 
 MotorControlSet::MotorControlSet(const std::shared_ptr<rclcpp::Node>& node_handle, 
 						const std::string &can_rx, 
@@ -40,9 +41,9 @@ MotorControlSet::~MotorControlSet()
 
 void MotorControlSet::can1_rx_Callback(const can_msgs::msg::Frame::SharedPtr msg)
 {   
-    if(uint8_t((msg->id&0xFF00)>>8) == 0x01)
-    {   
-        // Motor 1
+    uint8_t motor_id = uint8_t((msg->id & 0xFF00) >> 8);
+   
+    if (motor_id == l1_joint.getCANID()) {
         l1_joint.RobStrite_Motor_Analysis(msg->data.data(), msg->id);
         joint_feedback.pos[0] = l1_joint.Pos_Info.Angle;
         joint_feedback.vel[0] = l1_joint.Pos_Info.Speed;
@@ -50,11 +51,8 @@ void MotorControlSet::can1_rx_Callback(const can_msgs::msg::Frame::SharedPtr msg
         joint_feedback.temp[0] = l1_joint.Pos_Info.Temp;
         joint_feedback.error_code[0] = l1_joint.error_code;
         joint_feedback.pattern[0] = l1_joint.Pos_Info.pattern;
-
     }
-    else if(uint8_t((msg->id&0xFF00)>>8) == 0x02)
-    {
-        // Motor 2
+    else if (motor_id == l2_joint.getCANID()) {
         l2_joint.RobStrite_Motor_Analysis(msg->data.data(), msg->id);
         joint_feedback.pos[1] = l2_joint.Pos_Info.Angle;
         joint_feedback.vel[1] = l2_joint.Pos_Info.Speed;
@@ -62,11 +60,8 @@ void MotorControlSet::can1_rx_Callback(const can_msgs::msg::Frame::SharedPtr msg
         joint_feedback.temp[1] = l2_joint.Pos_Info.Temp;
         joint_feedback.error_code[1] = l2_joint.error_code;
         joint_feedback.pattern[1] = l2_joint.Pos_Info.pattern;
-
     }
-    else if(uint8_t((msg->id&0xFF00)>>8) == 0x03)
-    {
-        // Motor 3
+    else if (motor_id == l3_joint.getCANID()) {
         l3_joint.RobStrite_Motor_Analysis(msg->data.data(), msg->id);
         joint_feedback.pos[2] = l3_joint.Pos_Info.Angle;
         joint_feedback.vel[2] = l3_joint.Pos_Info.Speed;
@@ -77,6 +72,16 @@ void MotorControlSet::can1_rx_Callback(const can_msgs::msg::Frame::SharedPtr msg
     }
 
     robstride_state_pub->publish(joint_feedback);
+}
+
+RobStrite_Motor& MotorControlSet::getMotor(uint8_t ID)
+{
+    if (ID == l1_joint.getCANID()) return l1_joint;
+    else if (ID == l2_joint.getCANID()) return l2_joint;
+    else if (ID == l3_joint.getCANID()) return l3_joint;
+    else {
+        throw std::runtime_error("Invalid motor ID: 0x" + std::to_string(ID));
+    }
 }
 
 void MotorControlSet::command_Callback(const can_msgs::msg::Frame::SharedPtr msg){

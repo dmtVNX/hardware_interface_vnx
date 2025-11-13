@@ -19,9 +19,6 @@
   <build_depend>can_msgs</build_depend>
   <build_depend>motor_feedback_msg</build_depend>
 
-  <build_depend>hardware_interface</build_depend>
-  <build_depend>pluginlib</build_depend>
-  <build_depend>controller_manager</build_depend>
 
   <!-- run-time dependencies -->
   <exec_depend>rclcpp</exec_depend>
@@ -29,10 +26,6 @@
   <exec_depend>can_msgs</exec_depend>
   <exec_depend>motor_feedback_msg</exec_depend>
   <exec_depend>ros2_socketcan</exec_depend>
-
-  <exec_depend>hardware_interface</exec_depend>
-  <exec_depend>pluginlib</exec_depend>
-  <exec_depend>controller_manager</exec_depend>
 
   <export>
     <build_type>ament_cmake</build_type>

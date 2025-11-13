@@ -5,114 +5,103 @@ if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra -Wpedantic)
 endif()
 
-# -----------------------------
-# Dependencies
-# -----------------------------
+# find dependencies
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(std_msgs REQUIRED)
 find_package(can_msgs REQUIRED)
 find_package(motor_feedback_msg REQUIRED)
 
-# ros2_control plugin deps
-find_package(hardware_interface REQUIRED)
-find_package(pluginlib REQUIRED)
+# Include directories
+include_directories(include)
 
-# -----------------------------
-# Includes
-# -----------------------------
-include_directories(
-  ${CMAKE_CURRENT_SOURCE_DIR}/include
-)
-
-# -----------------------------
-# Driver library (your existing code)
-# -----------------------------
-add_library(${PROJECT_NAME}_lib SHARED
+# ========== EXISTING LIBRARIES ==========
+add_library(motor_config
   src/motor_config.cpp
   src/robstride.cpp
 )
-
-ament_target_dependencies(${PROJECT_NAME}_lib
-  rclcpp std_msgs can_msgs motor_feedback_msg
-)
-
-# -----------------------------
-# ros2_control hardware plugin (POSITION only)
-# -----------------------------
-
-add_library(robstride_hardware_simple SHARED
-  src/robstride_system_simple.cpp
-)
-target_include_directories(robstride_hardware_simple PUBLIC
-  ${CMAKE_CURRENT_SOURCE_DIR}/include
-)
-
-ament_target_dependencies(robstride_hardware_simple
+ament_target_dependencies(motor_config
   rclcpp
+  std_msgs
   can_msgs
-  hardware_interface
-  pluginlib
+  motor_feedback_msg
 )
+target_link_libraries(motor_config)
 
-target_link_libraries(robstride_hardware_simple
-  ${PROJECT_NAME}_lib
+# ========== EXISTING NODE (3 motors) ==========
+add_executable(motor_control_node
+  src/motor_control_node.cpp
 )
-
-pluginlib_export_plugin_description_file(hardware_interface robstride_hardware_simple_plugin.xml)
-
-# -----------------------------
-# Executable
-# -----------------------------
-add_executable(motor_control_node src/motor_control_node.cpp)
-target_link_libraries(motor_control_node ${PROJECT_NAME}_lib)
+target_link_libraries(motor_control_node motor_config)
 ament_target_dependencies(motor_control_node
-  rclcpp std_msgs can_msgs motor_feedback_msg
+  rclcpp
+  std_msgs
+  can_msgs
+  motor_feedback_msg
 )
 
-# -----------------------------
-# Install
-# -----------------------------
-# Libraries & executables
-install(TARGETS
-  ${PROJECT_NAME}_lib
-  robstride_hardware_simple
-  motor_control_node
+# ========== NEW: QUADRUPED CONTROLLER ==========
+add_library(quadruped_controller
+  src/quadruped_controller.cpp
+)
+target_link_libraries(quadruped_controller motor_config)
+ament_target_dependencies(quadruped_controller
+  rclcpp
+  std_msgs
+  can_msgs
+  motor_feedback_msg
+)
+
+# ========== NEW: QUADRUPED NODE (12 motors) ==========
+add_executable(quadruped_control_node
+  src/quadruped_control_node.cpp
+)
+target_link_libraries(quadruped_control_node 
+  quadruped_controller
+  motor_config
+)
+ament_target_dependencies(quadruped_control_node
+  rclcpp
+  std_msgs
+  can_msgs
+  motor_feedback_msg
+)
+
+# ========== INSTALL ==========
+install(TARGETS motor_config quadruped_controller
   ARCHIVE DESTINATION lib
   LIBRARY DESTINATION lib
-  RUNTIME DESTINATION lib/${PROJECT_NAME}
+  RUNTIME DESTINATION bin
 )
 
-# Headers
-install(
-  DIRECTORY include/
-  DESTINATION include/
+
+install(TARGETS motor_control_node quadruped_control_node
+  DESTINATION lib/${PROJECT_NAME}
 )
 
-# Plugin XML
-install(
-  FILES robstride_hardware_simple_plugin.xml
-  DESTINATION share/${PROJECT_NAME}
+install(DIRECTORY include/
+  DESTINATION include
 )
 
-# Config & Launch
-install(
-  DIRECTORY config
-  DESTINATION share/${PROJECT_NAME}
-)
-install(
-  DIRECTORY launch
-  DESTINATION share/${PROJECT_NAME}
+install(DIRECTORY launch scripts
+  DESTINATION share/${PROJECT_NAME}/
+  USE_SOURCE_PERMISSIONS
 )
 
-# -----------------------------
-# Tests
-# -----------------------------
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
   set(ament_cmake_copyright_FOUND TRUE)
   set(ament_cmake_cpplint_FOUND TRUE)
   ament_lint_auto_find_test_dependencies()
 endif()
+
+ament_export_include_directories(include)
+ament_export_libraries(motor_config quadruped_controller)
+ament_export_dependencies(
+  rclcpp
+  std_msgs
+  can_msgs
+  motor_feedback_msg
+)
 
 ament_package()
